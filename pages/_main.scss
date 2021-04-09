@@ -1,0 +1,181 @@
+@charset 'UTF-8';
+//変数
+$pt-size: 4px;
+$ma-size: 40px;
+$mb: 600px;
+// レイアウト幅
+$layout-width-inner: 1165px;
+
+// ブレークポイント
+$breakpoints: (
+  "sp": "screen and (max-width: 767px)",
+  "tab": "screen and (max-width: #{$layout-width-inner - 1px})",
+  "pc": "screen and (min-width: #{$layout-width-inner})",
+);
+
+//レスポンシブブレイクポイント（モバイル版）
+@mixin mobile-size {
+     @media (max-width: $mb) {
+       @content;
+     }
+   }
+
+// メディアクエリー試し
+@mixin mq($breakpoint: sp) {
+
+     @media #{map-get($breakpoints, $breakpoint)} {
+   
+       @content;
+     }
+   }
+
+@mixin circle($size:74%) {
+     width: $size;
+}
+
+
+
+@mixin flex($size) {
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: $size;  
+}
+@mixin sub-title($f-size:1.375rem,$p-size:0 8px 8px,$bb-size: 2px #0bd solid,$f-wig:normal) {
+     font-size: $f-size;
+     padding:$p-size ;
+     border-bottom: $bb-size;
+     font-weight: $f-wig;
+}
+@mixin asi-p($color:#000,$pa:12px 10px) {
+     color: $color;
+     padding: $pa;
+}
+.news-contents{
+     @include flex(50px);
+     @include mobile-size{
+        flex-direction: column;
+     }
+     .ad{
+          order: 1; //このプロパティはdisplay: flexの指定がある要素の子要素でしか動作しない
+     }
+}
+article{
+     @include circle($size:60%); //引数にデフォルト74%が入っているがここでは、６０％に変更している
+     order: 2; //orederプロパティを表示したい順に指定できる
+     @include mobile-size{
+          width: 100%; //横幅いっぱいにコンテンツを広げる
+          .post-info{
+               position: relative; //相対位置への配置
+               padding-top:  $pt-size;
+               margin-bottom: $ma-size;
+               @include mobile-size{
+                    margin-bottom: 30px;
+                    .post-date{
+                    //日付部分の背景、角丸、文字色、横幅、高さ、フォントサイズ、テキストの位置を指定
+                    background: #0bd;
+                    border-radius: 50%;
+                    color: #fff;
+                              width: 100px;
+                              height: 100px;
+                              font-size: 1.625rem;
+                              text-align: center;
+                    
+                              @include mq('sp'){
+                                   width: 70px;
+                                   height: 70px;
+                                   font-size: 1rem;
+                              }
+                              //.post-infoからの絶対位置と調整の指定
+                              position: absolute;
+                              top: 0;
+                              padding-top: 10px;
+                    
+                    
+                              
+                              span{ //日付の指定と日付の上に水平線を入れる
+                                   font-size: 1rem;
+                                   border-top:rgba(255,255,255,.5) solid; //不透明度の設定.5は50%
+                                   padding-top: 6px;
+                                   display: block;
+                                   width: 60%;
+                                   margin: 0 auto;
+                    
+                                   @include mq('sp'){
+                                        font-size: 0.875rem;
+                                        margin-top: 2px;
+                                   }
+                              }
+                         }
+                         .post-title{
+                              font-family: 'Noto Serif JP', serif;
+                              font-size: 2rem;
+                              font-weight: normal;
+                              @include mq('sp'){
+                                   font-size: 1.375rem;
+                              } 
+                         }  
+                         .post-title,.post-cat{
+                              color: #432;
+                              margin-left: 120px;
+                              @include mq('sp'){
+                                   font-size: 0.875rem;
+                                   margin-top: 10px;
+                                  margin-left: 80px;
+                              } 
+                    
+                         }
+                    }
+               }
+     }
+}
+
+   article img{
+          width: 100%;
+          // width: 660px;
+          margin-bottom: 20px
+     }  
+    article p{
+          color: #432;
+          margin-bottom: 1rem;
+     }
+
+
+aside{
+     @include circle(22%);
+     order: 3;
+     @include mobile-size{
+          width: 100%; //横幅いっぱいにコンテンツを広げる
+          margin-top: 60px;
+     }
+
+}
+aside .sub-title{
+ @include sub-title
+}
+aside p{
+@include asi-p
+}
+
+.sub-menu{
+  margin-bottom: 60px;
+  list-style: none;//リストマーク非表示
+  li{
+       border-bottom: 1px #ddd solid;
+  }
+  a{
+       color: #432;
+       padding: 10px;
+       display: block;//リンクをクリックできる範囲を広げる
+       &:hover{
+        color: #0bd;
+       }
+  }
+}
+
+
+
+
+
+
+
+

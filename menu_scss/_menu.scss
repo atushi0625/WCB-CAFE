@@ -1,0 +1,75 @@
+@charset 'UTF-8';
+$mb:600px;
+@mixin Menupage($size:5rem) {
+     font-size: $size;
+     text-align: center;
+     font-family: 'Philosopher', sans-serif;
+     text-transform:uppercase; //要素のテキストを大文字表記する方法
+     font-weight: normal;
+}
+@mixin mobile-size {
+     @media (max-width: $mb) {
+       @content;
+     }
+   }
+
+@mixin big-box($he:94%,$wid:100%) {
+     height: $he;
+     width: $wid;
+     object-fit: cover;//imgのサイズを無理矢理変更した場合にトリミングしてくれる
+}
+
+
+#menu{
+     background-image: url(/images/menu-bg.jpg);
+     min-height: 100vh;
+     
+     .menu-content{
+          max-width: 560px;
+          margin-top: 10%;
+          .page-title{
+               @include Menupage;
+               @include mobile-size{
+                    margin-top: 20%;
+               }
+               p{
+                    font-size: 1.125rem;
+          
+               }
+          }
+     }
+     
+}     
+.grid{
+     display: grid;//親要素に対して指定
+     gap: 26px; //要素同士の余白指定
+     // grid-template-columns: 1fr 1fr 1fr; //1:1:1の割合で１列に３つの要素を並べられる
+     // grid-template-columns: repeat(3, minmax(240px,1fr)); //reeat(繰り返す数、要素の幅）この場合1frのボックスが１列に３つ並ぶ
+     //minmaxで画像が２４０pxより小さくならず、画面の幅に合わせて伸縮
+     grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+     //auto-fitにより要素を折り返しながら親要素の余ったスペースが埋まっていく
+     margin-top:6%;
+     margin-bottom: 50px;
+     .big-box{
+          grid-column: 1/3; //縦範囲の指定
+          grid-row: 1/3;//横範囲の指定
+          @include mobile-size{
+               grid-column: auto;
+               grid-row: auto; 
+          }
+          img{
+               @include big-box;
+               @include mobile-size{
+                    height: 100%; //スマホ対応時100%にして高さを元に戻す
+               }
+          }
+     }
+}
+
+
+
+
+
+
+
+

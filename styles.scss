@@ -1,0 +1,49 @@
+@charset "UTF-8"; //コードの文字化けを防ぐ
+@use "pages/header"; //_header.scss
+@use "pages/home";//_home.scss
+@use "base/variables" as v; //_variables.scss
+@use "menu_scss/menu"; //menu_scss/_menu.scss
+@use "contact.scss/contact"; //contact.scss/_contact.scss
+@mixin footer($bak-color) {
+  background: $bak-color;
+  text-align: center;
+  padding: 26px 0;
+}
+
+html{
+  font-size: 100%;  //ユーザーの設定した文字サイズを正しく反映
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.7;
+  color: v.$body-color;
+
+  .big-bg{
+    // 画像の縦横の比率を保ったまま画面いっぱいに広げる
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+
+  //メイン画像とグラデーション
+  #home{
+    background-image: url(images/main-bg.jpg),linear-gradient(#c9ffbf, #ffafbd); //背景画像の指定
+    // background-image: linear-gradient(#c9ffbf, #ffafbd); //背景画像のグラデーション指定
+    min-height: 100vh; //画面の高さ指定、画面の表示領域の高さいっぱいに画像を広げます。
+    // background-color:v.$home-color ;
+    // background-blend-mode: hard-light; //背景画像にブレンドモードで色を重ね合わせる、色はbackground-colorで指定した色  }
+    background-blend-mode:luminosity; 
+  }
+
+// フッターCSS
+footer{
+  @include footer(#432);
+  p {
+    color: #fff;
+    font-size: 0.875rem;
+  }
+}
+
+}
+

@@ -1,0 +1,42 @@
+@charset "UTF-8"; //コードの文字化けを防ぐ
+@mixin mobile-size {
+     @media (max-width: 600px) {
+       @content;
+     }
+   }
+   
+// HOME
+.home-content{
+     text-align:center;
+     margin-top: 10%;
+     @include mobile-size{
+          margin-top: 20%;
+       };
+          p{
+               font-size: 1.125rem;
+               margin: 10px 0 42px;
+          }
+          // 見出し
+          .page-title{
+               font-size: 5rem;
+               font-family: 'Philosopher', sans-serif;
+               // text-transform:uppercase; //要素のテキストを大文字表記する方法
+               text-transform:none; //要素のテキストを大文字表記を変更しない
+               font-weight: normal;
+               @include mobile-size{
+                    font-size: 2.5rem;
+               }
+              }
+               // ボタン
+          }
+          .button{
+               font-size: 1.375rem;
+               background: #0bd ;
+               color: #fff;
+               border-radius: 5px;
+               padding: 18px 32px;
+               &:hover{
+                    background: #0090aa;
+                   }
+}
+          

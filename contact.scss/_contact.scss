@@ -1,0 +1,146 @@
+@charset 'UTF-8';
+// スマホ版レスポンシブ
+@mixin mobile-size {
+     @media (max-width: 600px) {
+       @content;
+     }
+   }
+
+$width:100%;
+$max-width: 240px;
+$boder-color: #305089;
+
+@mixin label {
+     font-size: 1.125rem;
+     margin-bottom: 10px;
+     display: block;
+}
+@mixin textarea-color {
+     background: rgba(255,255,255,.5);//半透明の設定
+     border: 1px #fff solid;
+     border-radius: 5px;
+     padding: 10px;
+     font-size: 1rem;
+}
+@mixin textarea-size{
+     width: 100%;
+     max-width: 480px;
+     height: 6rem;
+}
+@mixin input {
+     border: none;
+     cursor: pointer;
+     line-height: 1;
+}
+
+
+// contactのCSS
+
+#contact{
+     background-image: url(/images/contact-bg.jpg);
+     min-height: 100vh;
+     @include mobile-size{
+           margin-top: 40px;   
+     }
+
+}
+
+// フォーム類CSS
+form{
+     margin: 0;
+     div{
+          margin-bottom: 14px;
+     }
+     label{
+          @include label;
+     }
+     //inputタグの各種性は[]で囲んで指定できる、
+     // 複数のセレクターに同じ指定をする場合はカンマで区切る
+     //3つの属性の設定
+     input[type='text'],
+     input[type='email'],
+     textarea{
+          // width:$width;
+          // max-width:$max-width;
+          @include textarea-color;
+          @include mobile-size{
+               max-width: 100%;
+          }
+          
+     }
+     input[type='text'],
+     input[type='email']{ //それぞれの属性の設定
+          width:$width;
+          max-width:$max-width;
+          // @include textarea-color;
+
+     }
+          
+
+     textarea{
+          @include textarea-size;
+     }
+     input[type='submit']{//submit属性の設定
+          @include input;
+     }
+
+}
+
+/*店舗情報・地図*/
+#location{
+     padding: 4% 0;
+     .wrapper{
+         display: flex;
+         justify-content: space-between;
+         @include mobile-size{
+              flex-direction: column;
+         }
+         .location-info{
+              width: 22%;
+              @include mobile-size{
+                   width: 100%;
+              }
+              p{
+                   padding: 12px 10px;
+              }
+         }
+         .location-map{
+              width: 74%;
+              @include mobile-size{
+                   width: 100%;
+              }
+
+              /*googlemap*/
+              iframe{
+                   width: 100%;
+              }
+         }
+         .sub-title{
+              border-bottom:solid 1px $boder-color;
+         }
+     }
+}
+
+/*SNS*/
+#sns{
+     background: #faf7f0;
+     padding: 4% 0;
+     .wrapper{
+          display: flex;
+          justify-content: space-between;
+          @include mobile-size{
+               flex-direction: column;
+          }
+          .sub-title{
+               margin-bottom: 30px;
+               border-bottom: solid 2px $boder-color;
+          }
+          .sns-box{
+               width: 30%;
+               @include mobile-size{
+                    margin-bottom: 30px;
+                    width: 100%;
+               }
+          }
+     }
+}
